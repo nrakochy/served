@@ -7,4 +7,6 @@
 		  [ring/ring-core "1.4.0"]
 		  [ring/ring-jetty-adapter "1.4.0"]
 		  ]
-  :main served.core)
+  :uberjar {:aot :all}
+  :main served.main
+  :aot [served.main])

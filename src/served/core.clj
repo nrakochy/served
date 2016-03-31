@@ -1,5 +1,8 @@
 (ns served.core)
 
-(defn -main 
-  []
-  (println "Hello, World!"))
+(defn handler [request]
+  {:status 200
+   :headers {"Content-Type" "text/html"}
+   :body  "Works"})
+
+  

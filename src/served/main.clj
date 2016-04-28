@@ -1,8 +1,8 @@
 (ns served.main
   (:require [ring.adapter.jetty :refer [run-jetty]]
-	    [served.core :refer [handler]])
+	    [served.core :refer [runner])
   (:gen-class))
 
-(defn -main [& options]
-  (run-jetty handler {:port 5000}))
+(defn -main [handler & options]
+  (run-jetty handler options))
 

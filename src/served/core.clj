@@ -1,8 +1,13 @@
-(ns served.core)
+(ns served.core
+  "Entrypoint"
+  (require [served.response :as response])
+)
 
-(defn handler [request]
-  {:status 200
-   :headers {"Content-Type" "text/html"}
-   :body  "Works"})
+(defn handler 
+ "Public method for processing request"
+  response/respond [request]
+)
+  
+  
 
   

@@ -3,6 +3,6 @@
 	    [served.core :refer [handler]])
   (:gen-class))
 
-(defn -main [handler & options]
+(defn -main [& options]
   (run-server handler options))
 

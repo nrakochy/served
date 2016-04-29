@@ -15,7 +15,11 @@
   }
 )
 
-(defn add-status [resp status]
+(def accepted-content-type
+   {:html {"Content-Type" "text/html"}}
+)
+
+(defn set-status [resp status]
 )
   
 
@@ -24,8 +28,15 @@
 
 (defn set-body [])
 
-(defn respond [request]
-  {:status (get codes :ok)  
+
+(defn process-request [request]
+  {:status 200 
    :headers {"Content-Type" "text/html"}
    :body request})
+
+(defn respond [request]
+  (process-request request)
+)
+
+
 

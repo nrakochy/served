@@ -1,8 +1,8 @@
 (ns served.main
-  (:require [ring.adapter.jetty :refer [run-jetty]]
-	    [served.core :refer [runner])
+  (:require [org.httpkit.server :refer [run-server]]
+	    [served.core :refer [handler]])
   (:gen-class))
 
 (defn -main [handler & options]
-  (run-jetty handler options))
+  (run-server handler options))
 

@@ -4,6 +4,7 @@
 )
 
 (defn handler 
+  [request]
  "Public method for processing request"
   response/respond [request]
 )

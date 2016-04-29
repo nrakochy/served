@@ -5,7 +5,7 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.8.0"]
 		  [ring/ring-core "1.4.0"]
-		  [ring/ring-jetty-adapter "1.4.0"]
+		  [http-kit "2.2.0-alpha1"]
 		  ]
   :uberjar {:aot :all}
   :main served.main

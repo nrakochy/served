@@ -5,6 +5,7 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.8.0"]
 		  [http-kit "2.2.0-alpha1"]
+		  [org.clojure/tools.cli "0.3.3"]
 		  ]
   :uberjar {:aot :all}
   :main served.main

@@ -1,6 +1,6 @@
-(ns served.core
+(ns served.app.core
   "Entrypoint"
-  (:require [served.response :refer[respond]])
+  (:require [served.app.response :refer[respond]])
 )
 
 (defn handler 
@@ -8,7 +8,4 @@
  "Public method for processing request"
   (respond request)
 )
-  
-  
-
   

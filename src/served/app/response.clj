@@ -1,4 +1,4 @@
-(ns served.response)
+(ns served.app.response)
 
 (def codes 
   {
@@ -15,8 +15,13 @@
   }
 )
 
-(def accepted-content-type
-   {:html {"Content-Type" "text/html"}}
+(def media-types 
+   {
+   "htm"    "text/html"
+   "html"   "text/html"
+   "json"   "application/json"
+   "text"   "text/plain"
+  }
 )
 
 (defn set-status [resp status]
@@ -27,7 +32,6 @@
 )
 
 (defn set-body [])
-
 
 (defn process-request [request]
   {:status 200 

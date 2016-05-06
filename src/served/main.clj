@@ -1,6 +1,6 @@
 (ns served.main
   (:require [org.httpkit.server :refer [run-server]]
-	    [served.core :refer [handler]]
+	    [served.app.core :refer [handler]]
 	    [clojure.tools.cli :refer [parse-opts]])
   (:gen-class))
 

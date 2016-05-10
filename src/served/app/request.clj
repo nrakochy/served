@@ -1,15 +1,19 @@
 (ns served.app.request)
 
+(defn employees [])
+(defn company [])
+(defn dashboard [])
+
 (def routes 
-  {:resources {:name "employees" :methods [:get, :post] :parent_path "company"}
-	      {:name "company" :methods [:get, :post]} 
-	      {:name "dashboard" :root_path true} }
+  [{:name employees :methods [:get, :post] :parent_path "company"}
+   {:name company :methods [:get, :post]} 
+   {:name dashboard :root_path true}]
 )
 
-(defn compile-routes 
-   (-> routes
-      associate-path 
-   )
+(defn compile-routes []
+   ;;(-> routes
+   ;;   add-paths 
+   ;;)
 )
 
 (defn associate-path [resource path]
@@ -20,11 +24,11 @@
   (map 
     #(if (contains? % :root_path)
       (associate-path % "/")
-      (associate-path % (str "/" (get % :name)))
+      (associate-path % (str "/" (name (get % :name))))
      ) route-map)
 )
 
-(def routes-registry (compile-routes)) 
+(defn routes-registry [] (compile-routes)) 
 
 (defn identify-resource [uri-path]
 )

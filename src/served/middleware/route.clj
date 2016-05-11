@@ -1,11 +1,5 @@
 (ns served.middleware.route)
 
-(defn compile-routes []
-   ;;(-> routes
-   ;;   add-paths 
-   ;;)
-)
-
 (defn associate-path [resource path]
   (assoc resource :path path)
 )
@@ -17,3 +11,10 @@
       (associate-path % (str "/" (get % :name)))
      ) route-map)
 )
+
+(defn compile-routes [resources]
+   (-> resources 
+      (add-paths))
+)
+
+

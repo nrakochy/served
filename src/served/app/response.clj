@@ -24,17 +24,25 @@
   (or allowed-list '(:get)))
 )
 
+(defn extract-matching-route [request routes-map]
+  (let [requested-route (:uri request)]
+  (some #(if (-> % :path (= requested-route)) %) routes-map))
+)
+
+(defn disallowed-method? [request routes-map]
+)
+
+
 (defn invalid-path? [request routes-map] 
   (not 
     (let [requested-uri (get request :uri)]
     (.contains (paths routes-map) requested-uri)))
-  
 )
 
 (defn process-request [request routes-map]
   (if (invalid-path? request routes-map)
-    (not-found request)
-    (ok request))
+    (not-found request))
+    (ok request)
 )
 
 (defn respond [request routes-map]

@@ -42,6 +42,24 @@
   )
 )
 
+(deftest extract-matching-route-test 
+  (testing "returns requested route from routes-map"
+    (let [request {:uri "/" :name "test"}] 
+    (let [result {:name "test" :path "/"}] 
+    (let [available-routes 
+      [result {:name "test1" :path "/test1"} {:name "test2" :path "/test2"}]]
+    (is (= result (extract-matching-route request available-routes))))))
+  )
+)
+
+(deftest extract-matching-route-test-no-match-found 
+  (testing "returns nil from routes-map if no match found"
+    (let [request {:uri "/missing-test" :name "test"}] 
+    (let [available-routes 
+      [{:name "test" :path "/"} {:name "test1" :path "/test1"} {:name "test2" :path "/test2"}]]
+    (is (= nil (extract-matching-route request available-routes)))))
+  )
+)
 
 
 

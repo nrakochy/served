@@ -2,30 +2,6 @@
   (:require [clojure.test :refer :all])
   (:require [served.app.response :refer :all]))
 
-(deftest paths-test 
-  (testing "returns a sequence of :path keys"
-    (let [routes [{:test "test" :path "/"} {:test1 "test1" :path "/test1"}]] 
-    (let [result (lazy-seq '("/" "/test1"))]
-    (is (= result (paths routes)))))
-  )
-)
-
-(deftest invalid-path?-test-true 
-  (testing "returns true if request uri is not included in routes-map"
-    (let [routes [{:test "test" :path "/"} {:test1 "test1" :path "/test1"}]] 
-    (let [request  {:uri "/missing" :server-name "localhost"} ] 
-    (is (= true (invalid-path? request routes)))))
-  )
-)
-
-(deftest invalid-path?-test-false 
-  (testing "returns false if request uri is not included in routes-map"
-    (let [routes [{:test "test" :path "/"} {:test1 "test1" :path "/test1"}]] 
-    (let [request  {:uri "/test1" :server-name "localhost"} ] 
-    (is (= false (invalid-path? request routes)))))
-  )
-)
-
 (deftest allowed-methods-test-default 
   (testing "returns a list with :get as the default method available to endpoints"
     (let [route {:test "test" :path "/"}] 
@@ -60,6 +36,26 @@
     (is (= nil (extract-matching-route request available-routes)))))
   )
 )
+
+(deftest requested-method-not-allowed 
+  (testing "returns nil if a requested route uses method not allowed"
+    (let [matching-route {:test "test" :path "/" :methods [:get :post]}] 
+    (let [request {:uri "/" :request-method :delete}] 
+    (is (= nil (requested-method request matching-route)))))
+  )
+)
+
+(deftest requested-method-allowed 
+  (testing "returns matching method if request-method is permitted"
+    (let [matching-route {:test "test" :path "/" :methods [:get :post]}] 
+    (let [request {:uri "/" :request-method :post}] 
+    (is (= :post (requested-method request matching-route)))))
+  )
+)
+
+
+
+
 
 
 

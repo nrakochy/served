@@ -5,7 +5,9 @@
 )
 
 (def routes-list 
-  [{:name "form" :methods [:get :post]}
+  [{:name "form" :methods [:get :put]}
+   {:name "file1"}
+   {:name "text-file.txt"}
    {:name "method_options" :methods [:get :post]} 
    {:name "logs"} 
    {:name "directory-links" :root_path true}])

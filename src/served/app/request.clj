@@ -1,10 +1,7 @@
 (ns served.app.request)
 
-(defn identify-resource [uri-path]
+(defn lookup-route [request routes-map]
+  (let [requested-route (:uri request)]
+  (let [matching-route  (some #(if (-> % :path (= requested-route)) %) routes-map)]
+  (assoc request :matching-route matching-route)))
 )
-
-(defn parse-request [request]
-)
-
-
-

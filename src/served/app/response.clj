@@ -5,43 +5,24 @@
    :headers {"Content-Type" "text/html"}
    :body request})
 
-(defn not-found [request]
-  {:status 404 
-   :headers {"Content-Type" "text/html"}
-   :body "Not found"})
-
 (defn method-not-allowed [request]
   {:status 405 
    :headers {"Content-Type" "text/html"}
-   :body "You can't make that kind of request here."})
+   :body request})
 
 (defn allowed-methods [route]
   (let [allowed-list (:methods route)]    
   (or allowed-list '(:get)))
 )
 
-(defn extract-matching-route [request routes-map]
-  (let [requested-route (:uri request)]
-  (some #(if (-> % :path (= requested-route)) %) routes-map))
-)
-
-(defn requested-method [request matching-route]
-  (let [requested #{(:request-method request)}]
+(defn requested-method [{:keys [request-method matching-route]}]
   (let [allowed-list (allowed-methods matching-route)]
-  (some requested allowed-list)))  
+  (some #{request-method} allowed-list))  
 )
 
-(defn process-request [request requested-route]
-  (if (requested-method request requested-route) 
-    (ok request)
-    (method-not-allowed request))
+(defn respond [mapped-request]
+  (let [original-req (dissoc mapped-request :matching-route)]
+  (if (requested-method mapped-request) 
+    (ok original-req)
+    (method-not-allowed original-req)))
 )
-
-(defn respond [request routes-map]
-  (let [requested-route (extract-matching-route request routes-map)]
-  (if requested-route 
-    (process-request request requested-route)
-    (not-found request)))
-)
-
-

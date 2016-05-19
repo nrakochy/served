@@ -2,11 +2,11 @@
   (:require [clojure.test :refer :all])
   (:require [served.app.request :refer :all]))
 
-(deftest associate-path-test 
-  ;;(testing "Appends a :path key and path string value to a given hash"
-  ;;  (let [resource {:test "test"}]
-  ;;  (let [path "/test"]
-  ;;  (let [result {:test "test" :path "/test"}]
-  ;;  (is (= result (associate-path resource path))))))
-  ;;)
+(deftest lookup-route-test 
+  (testing "returns a hash with an additional :matching-route key + matching route value" 
+    (let [request {:uri "/test"}] 
+    (let [routes [{:path "/test" :test-data "test-data"} {:path "/" :test-data "test"} {:path "/test2" :test "test"}]]
+    (let [result {:uri "/test" :matching-route {:path "/test" :test-data "test-data"}}]
+    (is (= result (lookup-route request routes)))))))
 )
+
